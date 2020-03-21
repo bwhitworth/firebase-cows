@@ -3,6 +3,7 @@
 package-lock.json
 node_modules/
 .firebase/
+src/javascripts/helpers/apiKeys.json
 
 # Logs
 logs
