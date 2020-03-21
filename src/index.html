@@ -7,10 +7,23 @@
   <title>Firebase Cows</title>
 </head>
 <body>
-  <div>
-    <h1>Firebase Cows</h1>
-    <br>
-    <button class="btn-primary col-4 offset-4">Help</button>
-  </div>
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Cows</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <button id="navbar-logout-btn" class="nav-link btn btn-danger text-light">Logout</button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!-- AUTHENTICATION -->
+  <div id="auth"></div>
+  <!-- CONTAINER -->
+  <div id="pasture" class="hide">I see cows...</div>
 </body>
 </html>
