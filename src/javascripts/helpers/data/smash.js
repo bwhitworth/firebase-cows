@@ -8,22 +8,45 @@ const getSingleFarmerWithCows = (farmerId) => new Promise((resolve, reject) => {
       const farmer = response.data;
       farmer.id = farmerId;
       farmer.cows = [];
-      // 1. V get farmerCows by farmer uid, get uid from response.data ^
+      // 1.  get farmerCows by farmer uid
       farmerCowData.getFarmerCowsByFarmerUid(farmer.uid).then((farmerCows) => {
-        // no need for a .catch here, because the catch at the end of this parent function will catch
-        // 2. V get all cows (nested) (query string - can query by ONE THING)
+        // 2.  get ALL cows
         cowData.getCows().then((allCows) => {
-          // 3. V smash (nested again)
-          // loop over farmerCows, find the cow that matches farmerId, push into cows array
+          // 3.   SMASH
           farmerCows.forEach((farmerCow) => {
             const cow = allCows.find((x) => x.id === farmerCow.cowId);
             farmer.cows.push(cow);
           });
-          resolve(farmer); // any data you want has to be in that farmer object
+          // {
+          //   age: 1000,
+          //   name: 'zoe',
+          //   uid: 'A06GVOBrTNOc6scEZzPrOcij0Yu2',
+          //   id: 'farmer1',
+          //   cows: [
+          //     { id: 'cow1', breed: "Jersey", location: "NSS", name: "Bessie", weight: 30 },
+          //     { id: 'cow3', breed: "Angus", location: "NSS", name: "Steak", weight: 50000000000}
+          //   ]
+          // }
+          resolve(farmer);
         });
       });
     })
     .catch((err) => reject(err));
 });
 
-export default { getSingleFarmerWithCows };
+const completelyRemoveCow = (cowId) => new Promise((resolve, reject) => {
+  cowData.deleteCow(cowId)
+    .then(() => {
+      // 1.  GET all farmerCows by cowId
+      farmerCowData.getFarmerCowsByCowId(cowId).then((farmerCows) => {
+        // 2.  loop over all farmerCows from step 1 and DELETE each one
+        farmerCows.forEach((fCow) => {
+          farmerCowData.deleteFarmerCow(fCow.id);
+        });
+        resolve();
+      });
+    })
+    .catch((err) => reject(err));
+});
+
+export default { getSingleFarmerWithCows, completelyRemoveCow };
