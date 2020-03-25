@@ -15,7 +15,6 @@ const buildFarmer = (e) => {
       singleFarmer.cows.forEach((cow) => {
         domString += `<p class="card-text">${cow.name} (${cow.location})</p>`;
       });
-      console.error(singleFarmer);
       domString += '</div>';
       domString += '</div>';
 
