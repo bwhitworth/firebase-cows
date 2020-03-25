@@ -15,6 +15,7 @@ const getFarmerCowsByFarmerUid = (uid) => new Promise((resolve, reject) => {
         farmerCows.push(demFarmerCows[farmerCowId]);
       });
       resolve(farmerCows);
+      console.error('farmerCows:', farmerCows);
     })
     .catch((err) => reject(err));
 });
