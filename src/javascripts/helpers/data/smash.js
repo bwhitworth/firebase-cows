@@ -19,9 +19,9 @@ const getSingleFarmerWithCows = (farmerId) => new Promise((resolve, reject) => {
             const cow = allCows.find((x) => x.id === farmerCow.cowId);
             farmer.cows.push(cow);
           });
+          resolve(farmer); // any data you want has to be in that farmer object
         });
       });
-      resolve(farmer); // any data you want has to be in that farmer object
     })
     .catch((err) => reject(err));
 });
